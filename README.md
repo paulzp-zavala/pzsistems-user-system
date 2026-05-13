@@ -168,8 +168,3 @@ http://localhost/perfil_usuario_php
 Desarrollo Web - PHP y MySQL  
 UTPL - 2026
 
----
-
-## Repositorio GitHub
-
-[Repositorio del proyecto](https://github.com/paulzp-zavala/pzsistems-user-system?utm_source=chatgpt.com)
