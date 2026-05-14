@@ -31,14 +31,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $usuario = $resultado->fetch_assoc();
 
-            if (password_verify($password, $usuario["password"])) {
+            if ($usuario["estado"] != "activo") {
+                $mensaje = "Su usuario se encuentra inactivo.";
+                $tipoMensaje = "error";
+
+            } elseif (password_verify($password, $usuario["password"])) {
 
                 $_SESSION["usuario_id"] = $usuario["id"];
                 $_SESSION["nombres"] = $usuario["nombres"];
                 $_SESSION["username"] = $usuario["username"];
                 $_SESSION["tema"] = $usuario["tema"];
+                $_SESSION["rol"] = $usuario["rol"];
 
-                header("Location: perfil.php");
+                if ($usuario["rol"] == "admin") {
+                    header("Location: admin_panel.php");
+                } else {
+                    header("Location: perfil.php");
+                }
+
                 exit();
 
             } else {

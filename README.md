@@ -4,22 +4,38 @@ Sistema web desarrollado en PHP y MySQL para la gestión de perfiles de usuario.
 
 Sistema CRUD de usuarios desarrollado con arquitectura cliente-servidor utilizando PHP y MySQL, permitiendo el registro, autenticación y administración segura de perfiles de usuario mediante sesiones y validaciones.
 
+Además, el sistema incorpora un panel administrativo con manejo de roles para la gestión completa de usuarios.
+
 ---
 
 ## Funcionalidades
+
+### Usuarios
 
 - Registro de usuarios
 - Inicio de sesión seguro
 - Dashboard de perfil
 - Actualización de datos personales
 - Cambio de contraseña
-- Validación de formularios
 - Tema claro y oscuro
-- Avatar por defecto y subida de foto
-- Alertas modernas con SweetAlert
-- Seguridad con contraseñas cifradas
-- Validación de duplicados
+- Avatar por defecto y subida de fotografía
+- Validación de formularios
 - Visualización y ocultamiento de contraseña
+- Alertas modernas con SweetAlert
+- Logout y cierre seguro de sesión
+
+---
+
+### Administrador
+
+- Panel administrativo
+- Gestión completa de usuarios
+- Agregar usuarios
+- Editar usuarios
+- Eliminar usuarios
+- Control de roles
+- Control de estado de usuarios
+- Administración sin necesidad de phpMyAdmin
 
 ---
 
@@ -48,8 +64,13 @@ perfil_usuario_php/
 ├── perfil.php
 ├── actualizar_perfil.php
 ├── cambiar_password.php
-├── conexion.php
 ├── logout.php
+├── conexion.php
+│
+├── admin_panel.php
+├── admin_agregar.php
+├── admin_editar.php
+├── admin_eliminar.php
 │
 ├── img/
 │   ├── logo.png
@@ -80,6 +101,8 @@ perfil_usuario_php/
 - Validación de imágenes permitidas
 - Uso de consultas preparadas (`prepare()`)
 - Prevención básica de inyección SQL
+- Control de acceso por roles
+- Validación de sesión administrativa
 
 ---
 
@@ -133,7 +156,7 @@ CREATE DATABASE perfil_usuario_db;
 
 ---
 
-### 5. Crear la tabla usuarios
+### 5. Crear tabla usuarios
 
 ```sql
 CREATE TABLE usuarios (
@@ -146,15 +169,27 @@ CREATE TABLE usuarios (
     password VARCHAR(255) NOT NULL,
     foto VARCHAR(255) DEFAULT 'avatar.png',
     tema VARCHAR(20) DEFAULT 'light',
+    rol VARCHAR(20) DEFAULT 'usuario',
+    estado VARCHAR(20) DEFAULT 'activo',
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 ```
 
 ---
 
-### 6. Ejecutar el sistema
+### 6. Crear usuario administrador
 
-Abrir en el navegador:
+```sql
+UPDATE usuarios
+SET rol = 'admin'
+WHERE correo = 'correo_del_administrador';
+```
+
+---
+
+### 7. Ejecutar el sistema
+
+Abrir en navegador:
 
 ```bash
 http://localhost/perfil_usuario_php
@@ -162,9 +197,28 @@ http://localhost/perfil_usuario_php
 
 ---
 
+## Flujo principal del sistema
+
+```text
+Registro
+→ Login
+→ Perfil de usuario
+→ Actualización de datos
+→ Cambio de contraseña
+→ Logout
+
+Administrador
+→ Login admin
+→ Panel administrativo
+→ Agregar usuarios
+→ Editar usuarios
+→ Eliminar usuarios
+```
+
+---
+
 ## Autor
 
-**Paul Andres Zavala Palomeque**  
+**Paul Zavala**  
 Desarrollo Web - PHP y MySQL  
 UTPL - 2026
-
