@@ -125,6 +125,11 @@ perfil_usuario_php/
 ![Perfil](img/profile-preview.png)
 
 ---
+### Panel de ADministrador
+
+![Perfil](img/admin_panel.png)
+
+---
 
 ## Instalación
 
